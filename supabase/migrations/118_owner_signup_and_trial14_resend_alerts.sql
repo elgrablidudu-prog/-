@@ -52,7 +52,7 @@ BEGIN
       'Authorization', 'Bearer ' || v_api_key
     ),
     body    := jsonb_build_object(
-      'from',    'PLTO <onboarding@resend.dev>',
+      'from',    'PLTO <alerts@plto.app>',
       'to',      jsonb_build_array('elgrablidudu@gmail.com'),
       'subject', p_subject,
       'html',    p_html
@@ -142,7 +142,6 @@ SELECT cron.schedule(
 --   select vault.create_secret('re_xxxxxxxxxxxxxxxx', 'resend_api_key');
 -- בלי זה, שתי הפונקציות למעלה פשוט לא שולחות כלום (no-op), לא נכשלות.
 --
--- הערה על כתובת השולח: 'onboarding@resend.dev' היא כתובת הבדיקה של Resend,
--- שיכולה לשלוח רק לכתובת המייל של בעל חשבון ה-Resend עצמו. לשליחה אמינה
--- וללא ההגבלה הזו, יש לאמת דומיין אמיתי (למשל plto.app) בחשבון ה-Resend
--- ולעדכן את כתובת ה-from כאן בהתאם.
+-- כתובת השולח (alerts@plto.app) מבוססת על דומיין plto.app שכבר מאומת
+-- (Verified) בחשבון ה-Resend, כך שאין הגבלה על כתובת היעד — אפשר לשלוח
+-- לכל תיבת מייל, כולל Gmail אישי.
